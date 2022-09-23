@@ -1,6 +1,6 @@
 ########################## Authentication variables ###########################
 variable "region" {
-  default = "us-east-1"
+  default = "us-east-2"
 }
 
 variable "AWS_ACCESS_KEY_ID" {
