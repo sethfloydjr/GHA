@@ -42,7 +42,8 @@ jobs:
       - name: Terraform Plan
         working-directory: ./terraform
         id: plan
-        run: terraform plan -var="$AWS_ACCESS_KEY_ID" -var="$AWS_SECRET_ACCESS_KEY"
+        #run: terraform plan -var="$AWS_ACCESS_KEY_ID" -var="$AWS_SECRET_ACCESS_KEY"
+        run: terraform plan -var AWS_ACCESS_KEY_ID="$" -var AWS_SECRET_ACCESS_KEY="$"
         continue-on-error: false
 
       - run: echo ${{ steps.plan.outputs.stdout }}
