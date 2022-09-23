@@ -2,11 +2,11 @@ name: terraform-test
 on:
   push:
     branches:
-      - main
+      - plan
   pull_request:
 jobs:
   terraform:
-    name: Terraform
+    name: Terraform-plan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
