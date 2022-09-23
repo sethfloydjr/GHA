@@ -1,9 +1,10 @@
 name: terraform-test
+
 on:
   push:
     branches:
       - plan
-  pull_request:
+
 jobs:
   terraform:
     name: Terraform-plan
@@ -36,8 +37,10 @@ jobs:
       - name: Terraform Plan
         working-directory: ./terraform
         id: plan
-        run: terraform plan
+        run: terraform plan -var AWS_ACCESS_KEY_ID="$" -var AWS_SECRET_ACCESS_KEY="$"
         continue-on-error: false
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+
+      - run: echo ${{ steps.plan.outputs.stdout }}
+      - run: echo ${{ steps.plan.outputs.stderr }}
+      - run: echo ${{ steps.plan.outputs.exitcode }}
+        
