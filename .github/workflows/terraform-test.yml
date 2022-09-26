@@ -10,8 +10,6 @@ jobs:
   terraform:
     name: Terraform-plan
     runs-on: ubuntu-latest
-    
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -59,9 +57,9 @@ jobs:
             #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
             <details><summary>Show Plan</summary>
-            \`\`\`
-            \n
-            ${process.env.PLAN}
+            \`\`\`\n
+           
+            ${process.env.PLAN}  \n
             \`\`\`
             </details>
             *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
