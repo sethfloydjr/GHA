@@ -1,9 +1,6 @@
 name: terraform-test
 
-on:
-  push:
-    branches:
-      - plan
+on: [push]
 
 jobs:
   terraform:
