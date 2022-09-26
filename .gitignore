@@ -5,6 +5,7 @@
 # Ignore any .tfstate files
 *.tfstate
 *.tfstate.*
+*.hcl
 
 crash.log
 
