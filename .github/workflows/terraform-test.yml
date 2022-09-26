@@ -40,8 +40,8 @@ jobs:
         working-directory: ./terraform
         id: plan
         env:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: terraform plan -input=false
         continue-on-error: false
         
