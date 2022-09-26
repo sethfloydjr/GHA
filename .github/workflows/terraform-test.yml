@@ -3,14 +3,13 @@ name: terraform-test
 on:
   push:
     branches:
-      - plan
+      - main
+  pull_request:
 
 jobs:
   terraform:
     name: Terraform-plan
     runs-on: ubuntu-latest
-    
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -23,7 +22,7 @@ jobs:
       - name: Terraform fmt
         working-directory: ./terraform
         id: fmt
-        run: terraform fmt
+        run: terraform fmt -check
         continue-on-error: true
 
       - name: Terraform Init
@@ -34,16 +33,17 @@ jobs:
       - name: Terraform Validate
         working-directory: ./terraform
         id: validate
-        run: terraform validate
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         working-directory: ./terraform
         id: plan
+        if: github.event_name == 'pull_request'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: terraform plan -input=false
-        continue-on-error: false
+        run: terraform plan -input=false -no-color
+        continue-on-error: true
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
@@ -60,7 +60,7 @@ jobs:
             \`\`\`\n
             ${process.env.PLAN}
             \`\`\`
-            </details>
+            </details>\n
             *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
