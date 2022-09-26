@@ -41,6 +41,6 @@ jobs:
       - name: Terraform Plan
         working-directory: ./terraform
         id: plan
-        run: terraform plan -input=false
+        run: terraform plan -input=false -var="AWS_ACCESS_KEY_ID=${{secrets.TF_VAR_AWS_ACCESS_KEY_ID}}" -var="AWS_SECRET_ACCESS_KEY=${{secrets.TF_VAR_AWS_SECRET_ACCESS_KEY}}"
         continue-on-error: false
         
