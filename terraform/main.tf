@@ -16,9 +16,18 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = "t4.medium"
 
   tags = {
-    Name = "GHA test"
+    Name = "Web 1"
+  }
+}
+
+resource "aws_instance" "web2" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t4.medium"
+
+  tags = {
+    Name = "Web 2"
   }
 }
